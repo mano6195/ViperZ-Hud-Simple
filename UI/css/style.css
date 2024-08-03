@@ -1,0 +1,105 @@
+:root {
+    --hud-bg-color: rgba(0, 0, 0, 0.8);
+    --hud-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+    --hud-font-color: rgb(240, 238, 238);
+    --hud-text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+    --hud-level-bg-color: rgba(106, 206, 140, 0.5);
+    --hud-transition-duration: 0.3s;
+    --hud-running-width: 90px;
+    --hud-container-width: 25px;
+    --hud-container-height: 25px;
+    --hud-margin-bottom: 6px;
+    --hud-border-radius: 3px;
+    --logo-width: 95px;
+    --logo-opacity: 0.8;
+    --animation-duration: 0.5s;
+}
+
+#hud-container {
+    display: flex;
+    flex-direction: column; 
+    position: absolute;
+    left: 20px;
+    bottom: 7px;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+.container-appearing {
+    animation: slideIn var(--animation-duration) ease-in-out forwards;
+}
+
+.container-disappearing {
+    animation: slideOut var(--animation-duration) ease-in-out forwards;
+}
+
+#salud-container, #armadura-container, #hambre-container, #sed-container, #resistencia-container {
+    position: relative; 
+    width: var(--hud-container-width);
+    height: var(--hud-container-height); 
+    background-color: var(--hud-bg-color);
+    box-shadow: var(--hud-box-shadow);
+    font-size: 9px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-family: Mulish;
+    overflow: hidden;
+    margin-bottom: var(--hud-margin-bottom); 
+    border-radius: var(--hud-border-radius);
+}
+
+#salud, #armadura, #hambre, #sed, #resistencia {
+    position: relative;
+    z-index: 2;
+    color: var(--hud-font-color);
+    text-shadow: var(--hud-text-shadow);
+}
+
+#salud-level, #armadura-level, #hambre-level, #sed-level, #resistencia-level {
+    position: absolute;
+    width: 0%; 
+    height: 100%; 
+    background-color: var(--hud-level-bg-color);
+    left: 0; 
+    z-index: 1;
+    transition: width var(--hud-transition-duration) ease-in-out;
+}
+
+#logo-container {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+
+#server-logo {
+    width: var(--logo-width); 
+    height: auto;
+    opacity: var(--logo-opacity);
+}
+
+#resistencia-container.running {
+    width: var(--hud-running-width); 
+    height: var(--hud-container-height);
+    transition: width var(--hud-transition-duration) ease-in-out;
+}
